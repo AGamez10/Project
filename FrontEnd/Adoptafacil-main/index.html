@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoptafácil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-gradient-to-br from-[#80ff84] to-[#5190fc] flex justify-center items-center h-screen overflow-hidden relative">
+    <!-- Partículas -->
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+
+    <!-- Contenedor principal -->
+    <div
+        class="container text-center max-w-md w-full p-5 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 shadow-lg z-10 fade-in hover:scale-100 hover:shadow-none transition-transform duration-300 ease-in-out">
+        <!-- Logo -->
+        <img src="Logo.png" alt="Logo de Adoptafácil" class="w-56 h-36 mx-auto mb-8">
+
+        <!-- Formulario -->
+        <form action="submit" method="post" class="flex flex-col">
+            <!-- Usuario -->
+            <input type="text" id="nombre" name="nombre" placeholder="Correo electrónico o usuario" required
+                class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+
+            <!-- Contraseña -->
+            <input type="password" id="clave" name="clave" placeholder="Contraseña" required
+                class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+
+            <!-- Ingresar -->
+            <button type="submit" name="enviar"
+                class="w-1/3 mx-auto px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 ease-in-out transform hover:scale-105">
+                Ingresar
+            </button>
+
+            <!-- Olvidé mi contraseña -->
+            <p class="mt-4">
+                <a href="#" class="text-blue-500 hover:underline">¿Olvidaste tu contraseña?</a>
+            </p>
+
+            <!-- Separador -->
+            <hr class="my-6 border-t border-gray-300">
+
+            <!-- Crear cuenta -->
+            <a href="https://beto18v.github.io/Registro/"
+                class="w-1/3 mx-auto px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-all duration-300 ease-in-out transform hover:scale-105 text-center">
+                Crear cuenta
+            </a>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

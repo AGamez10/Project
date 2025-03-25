@@ -1,0 +1,67 @@
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #80ff84, #5190fc);
+    color: #333;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Estilos título */
+h1 {
+    background: linear-gradient(135deg, #128800, #00328a);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos párrafos */
+p {
+    display: block;
+    margin: 10px 0;
+    text-align: left;
+    max-width: 800px;
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+/* Enlace */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación al cuerpo */
+body {
+    animation: fadeIn 1s ease-out;
+}
