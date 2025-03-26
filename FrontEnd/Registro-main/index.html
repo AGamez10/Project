@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoptafácil</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <img src="Logo.png" alt="Logo de Adoptafácil" width="220" height="140">
+        <h1>Registro de usuario</h2>
+        <form action="submit" method="post">
+            <!--nombre visitante-->
+            <br><label for="nombre"></label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+
+            <!--apellido del visitante-->
+            <label for="apellido"></label>
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+
+            <!--edad del visitante-->
+            <label for="edad"></label>
+            <input type="number" id="edad" name="edad" placeholder="Edad" min="18" max="100" required>
+
+            <!--fecha nacimiento del visitante-->
+            <label for="fecha"></label>
+            <input type="date" id="fecha" name="Fecha de nacimiento">
+
+            <!--ciudad de residencia-->
+            <label for="ciudad"></label>
+            <select id="ciudad" name="Ciudad de residencia" required>
+                <option value="bo">Bogotá</option>
+                <option value="me">Medellín</option>
+                <option value="ca">Cali</option>
+            </select>
+
+            <!--correo electrónico-->
+            <label for="correo"></label>
+            <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+
+            <!--password-->
+            <label for="clave"></label>
+            <input type="password" id="clave" name="clave" placeholder="Contraseña" required>
+
+            <!--Terminos y condiciones-->
+            <label>
+                <input type="checkbox" name="aceptar" required><a href="https://beto18v.github.io/TYC/">Acepto términos y condiciones</a>
+            </label>
+
+            <!--Completar-->
+            <br><button type="submit" name="enviar">Completar registro</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
