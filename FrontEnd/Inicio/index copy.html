@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Adoptafácil - Encuentra tu mascota ideal para adoptar">
+    <title>Adoptafácil - Encuentra tu mascota ideal</title>
+    <!-- Precargar recursos críticos -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" as="script">
+    <link rel="preload" href="Logo.png" as="image">
+    <!-- Cargar CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Cargar Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        },
+                        secondary: {
+                            600: '#16a34a',
+                            700: '#15803d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen dark:bg-dark transition-colors duration-200">
+        <!-- Botón de modo oscuro -->
+        <button id="darkModeToggle" class="fixed bottom-4 right-4 bg-gray-800 text-white p-3 rounded-full shadow-lg z-50 dark:bg-gray-200 dark:text-gray-800" aria-label="Alternar modo oscuro">
+            <svg id="darkIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+        </button>
+    
+        <!-- HEADER (BARRA DE NAVEGACIÓN) -->
+        <header class="bg-white shadow-md z-10 relative dark:bg-gray-800 dark:shadow-dark">
+            <div class="container mx-auto py-3 px-4 flex justify-between items-center">
+                <!-- Logo y nombre del sitio -->
+                <div class="flex items-center space-x-2">
+                    <img src="Logo.png" alt="Logo Adoptafácil" class="h-12 w-full" width="48" height="48" loading="lazy">
+                    <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">ADOPTAFÁCIL</h1>
+                </div>
+                
+                <!-- Menú principal (oculto en tamaños pequeños) -->
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">ADOPTAR</a>
+                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">DONAR</a>
+                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">TESTIMONIO</a>
+                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">CONTACTO</a>
+                </nav>
+                
+                <!-- Botones de acción (Iniciar sesión, Registrarse) -->
+                <div class="flex items-center space-x-4">
+                    <a href="../Adoptafacil-main/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">Iniciar sesión</a>
+                    <a href="../Registro/index.html" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition dark:bg-green-700 dark:hover:bg-green-800">Registrarse</a>
+                </div>
+            </div>
+        </header>
+        
+        <!-- PORTADA PRINCIPAL -->
+        <section class="relative bg-gradient-to-r from-blue-500 to-green-400 text-white py-20 dark:from-blue-700 dark:to-green-600">
+            <div id="particles-js" class="fixed inset-0 z-0"></div>
+            <div class="container mx-auto text-center relative px-4">
+                <!-- Título principal -->
+                <h2 class="text-4xl font-bold mb-6">Encuentra a tu nuevo mejor amigo</h2>
+                <!-- Subtítulo -->
+                <p class="text-xl mb-8 mx-auto max-w-2xl">Conectamos a mascotas necesitadas con hogares amorosos desde 2025</p>
+    
+                <!-- Barra de búsqueda -->
+                <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-xl p-2 flex dark:bg-gray-800">
+                    <!-- Campo de búsqueda por raza -->
+                    <input type="text" placeholder="Buscar por raza (Ej: Perro, Gato)"
+                        class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400">
+    
+                    <!-- Campo de búsqueda por ubicación -->
+                    <input type="text" placeholder="Ciudad"
+                        class="flex-grow px-4 py-3 border-l border-gray-200 focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:placeholder-gray-400">
+    
+                    <!-- Botón de búsqueda -->
+                    <button class="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="container mx-auto px-4 py-12 z-10 relative">
+            <!-- SECCIÓN: MASCOTAS DESTACADAS -->
+            <section class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Mascotas disponibles</h2>
+    
+                <!-- Grid de tarjetas de mascotas -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tarjeta de mascota 1 -->
+                    <div class="pet-card bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl dark:bg-gray-800 dark:shadow-dark">
+                        <!-- Imagen de la mascota con lazy loading -->
+                        <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9" alt="Perro Labrador Mix llamado Max" 
+                             class="w-full h-48 object-cover" loading="lazy" width="400" height="192">
+                        <!-- Contenido de la tarjeta -->
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Max</h3>
+                            <p class="text-gray-600 mb-2 dark:text-gray-300">Labrador Mix • 2 años</p>
+                            <p class="text-gray-700 mb-4 dark:text-gray-300">Juguetón y cariñoso, ideal para familias con niños.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">
+                                Conocer más
+                            </button>
+                        </div>
+                    </div>
+    
+                    <!-- Tarjeta de mascota 2 -->
+                    <div class="pet-card bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl dark:bg-gray-800 dark:shadow-dark">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba" alt="Gato Siamés llamado Luna" 
+                             class="w-full h-48 object-cover" loading="lazy" width="400" height="192">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Luna</h3>
+                            <p class="text-gray-600 mb-2 dark:text-gray-300">Siamés • 1 año</p>
+                            <p class="text-gray-700 mb-4 dark:text-gray-300">Tranquila y curiosa, perfecta para apartamentos.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">
+                                Conocer más
+                            </button>
+                        </div>
+                    </div>
+    
+                    <!-- Tarjeta de mascota 3 -->
+                    <div class="pet-card bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl dark:bg-gray-800 dark:shadow-dark">
+                        <img src="https://images.unsplash.com/photo-1553284965-e2815db2e5a0" alt="Conejo Enano llamado Bugs" 
+                             class="w-full h-48 object-cover" loading="lazy" width="400" height="192">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Bugs</h3>
+                            <p class="text-gray-600 mb-2 dark:text-gray-300">Conejo Enano • 6 meses</p>
+                            <p class="text-gray-700 mb-4 dark:text-gray-300">Tranquilo y amigable, necesita espacio para saltar.</p>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">
+                                Conocer más
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- SECCIÓN: CATEGORÍAS -->
+            <section class="mb-16 fade-in">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Explora por categoría</h2>
+    
+                <!-- Grid de categorías -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <!-- Categoría 1 - Perros -->
+                    <a href="#" class="category-card bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 dark:bg-gray-800 dark:shadow-dark">
+                        <div class="bg-blue-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 dark:bg-blue-900">
+                            <span class="text-3xl">🐶</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Perros</h3>
+                        <p class="text-gray-600 dark:text-gray-300">+1,200 disponibles</p>
+                    </a>
+    
+                    <!-- Categoría 2 - Gatos -->
+                    <a href="#" class="category-card bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 dark:bg-gray-800 dark:shadow-dark">
+                        <div class="bg-blue-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 dark:bg-blue-900">
+                            <span class="text-3xl">🐱</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Gatos</h3>
+                        <p class="text-gray-600 dark:text-gray-300">+800 disponibles</p>
+                    </a>
+    
+                    <!-- Categoría 3 - Conejos -->
+                    <a href="#" class="category-card bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 dark:bg-gray-800 dark:shadow-dark">
+                        <div class="bg-blue-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 dark:bg-blue-900">
+                            <span class="text-3xl">🐰</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Conejos</h3>
+                        <p class="text-gray-600 dark:text-gray-300">+150 disponibles</p>
+                    </a>
+    
+                    <!-- Categoría 4 - Aves -->
+                    <a href="#" class="category-card bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 dark:bg-gray-800 dark:shadow-dark">
+                        <div class="bg-blue-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 dark:bg-blue-900">
+                            <span class="text-3xl">🐦</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Aves</h3>
+                        <p class="text-gray-600 dark:text-gray-300">+90 disponibles</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    
+        <!-- FOOTER (PIE DE PÁGINA) -->
+        <footer class="bg-gray-800 text-white py-12 z-10 relative dark:bg-gray-900">
+            <div class="container mx-auto px-4">
+                <!-- Grid de columnas del footer -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Columna 1 - Información -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">ADOPTAFÁCIL</h3>
+                        <p class="text-gray-400">Conectando mascotas con hogares amorosos desde 2023.</p>
+                    </div>
+    
+                    <!-- Columna 2 - Enlaces útiles -->
+                    <div>
+                        <h4 class="font-semibold mb-4">Enlaces útiles</h4>
+                        <ul class="space-y-2">
+                            <li><a href="http://127.0.0.1:5500/Project/FrontEnd/Perros/Perros.html" class="text-gray-400 hover:text-white transition">Cómo adoptar</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Preguntas frecuentes</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        </ul>
+                    </div>
+    
+                    <!-- Columna 3 - Contacto -->
+                    <div>
+                        <h4 class="font-semibold mb-4">Contacto</h4>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400">info@adoptafacil.com</li>
+                            <li class="text-gray-400">+1 234 567 890</li>
+                        </ul>
+                    </div>
+    
+                    <!-- Columna 4 - Redes sociales -->
+                    <div>
+                        <h4 class="font-semibold mb-4">Síguenos</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" aria-label="Facebook" class="text-gray-400 hover:text-white transition">FB</a>
+                            <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-white transition">IG</a>
+                            <a href="#" aria-label="Twitter" class="text-gray-400 hover:text-white transition">TW</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Derechos de autor -->
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>© 2023 Adoptafácil. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+            <!-- Scripts agregados -->
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="assets/js/dark-mode.js"></script>
+        <script src="assets/js/particles-config.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
+</body>
+</html>
