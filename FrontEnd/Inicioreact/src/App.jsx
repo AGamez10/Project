@@ -1,42 +1,17 @@
-import { useState, useEffect } from 'react';
-import ParticlesBackground from './components/ParticlesBackground';
+import Layout from './components/Layout';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Verificar el tema inicial
-    const isDark = document.documentElement.classList.contains('dark');
-    setIsDarkMode(isDark);
-
-    // Crear un evento personalizado para notificar cambios en el tema
-    const darkModeEvent = new Event('darkModeChanged');
-
-    // Función para cambiar el tema
-    const toggleDarkMode = () => {
-      document.documentElement.classList.toggle('dark');
-      setIsDarkMode(!isDarkMode);
-      document.dispatchEvent(darkModeEvent);
-    };
-
-    // Agregar el botón de cambio de tema al DOM
-    const darkModeButton = document.getElementById('darkModeToggle');
-    if (darkModeButton) {
-      darkModeButton.addEventListener('click', toggleDarkMode);
-    }
-
-    return () => {
-      if (darkModeButton) {
-        darkModeButton.removeEventListener('click', toggleDarkMode);
-      }
-    };
-  }, [isDarkMode]);
-
   return (
-    <div className={`app ${isDarkMode ? 'dark' : 'light'}`}>
-      <ParticlesBackground />
-      {/* Aquí puedes agregar el resto de los componentes de tu aplicación */}
-    </div>
+    <Layout>
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+          Bienvenido a Adoptafácil
+        </h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300">
+          Encuentra tu compañero perfecto para adoptar
+        </p>
+      </div>
+    </Layout>
   );
 }
 
