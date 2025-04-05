@@ -1,0 +1,70 @@
+/* Animación optimizada para performance */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.pet-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Estilos para modo oscuro */
+.dark .dark\:bg-dark {
+    background-color: #1a202c;
+}
+
+.dark .dark\:text-light {
+    color: #f7fafc;
+}
+
+.dark .dark\:bg-gray-800 {
+    background-color: #2d3748;
+}
+
+.dark .dark\:text-gray-300 {
+    color: #e2e8f0;
+}
+
+.dark .dark\:shadow-dark {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+}
+
+/* Mejoras de accesibilidad */
+:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Optimización de imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Asegurar que el header esté por encima de las partículas */
+header {
+    position: relative;
+    z-index: 10;
+}
+
+/* Contenedor de partículas */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
