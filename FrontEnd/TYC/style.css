@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
     background: linear-gradient(135deg, #80ff84, #5190fc);
     color: #333;
@@ -33,6 +33,7 @@ h1 {
 
 /* Estilos párrafos */
 p {
+    color: rgb(0, 0, 0);
     display: block;
     margin: 10px 0;
     text-align: left;
@@ -61,7 +62,3 @@ a {
     }
 }
 
-/* Animación al cuerpo */
-body {
-    animation: fadeIn 1s ease-out;
-}

@@ -43,53 +43,55 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
         </button>
-    
-        <!-- HEADER (BARRA DE NAVEGACIÓN) -->
+        <!-- HEADER -->
         <header class="bg-white shadow-md z-10 relative dark:bg-gray-800 dark:shadow-dark">
             <div class="container mx-auto py-3 px-4 flex justify-between items-center">
-                <!-- Logo y nombre del sitio -->
+                <!-- Logo y nombre -->
                 <div class="flex items-center space-x-2">
                     <img src="Logo.png" alt="Logo Adoptafácil" class="h-12 w-full" width="48" height="48" loading="lazy">
-                    <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">ADOPTAFÁCIL</h1>
+                    <h1 class="hidden md:block font-bold text-blue-600 dark:text-blue-400">ADOPTAFÁCIL</h1>
                 </div>
-                
-                <!-- Menú principal (oculto en tamaños pequeños) -->
-                <nav class="hidden md:flex space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">ADOPTAR</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">DONAR</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">TESTIMONIO</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">CONTACTO</a>
+                <!-- Botón de menú hamburguesa para móviles -->
+                <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="Menú">
+                    <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Menú principal -->
+                <nav id="mainMenu" class="hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 md:static md:flex md:bg-transparent dark:md:bg-transparent space-y-4 md:space-y-0 md:space-x-6 p-4 md:p-0 shadow-lg md:shadow-none">
+                    <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">ADOPTAR</a>
+                    <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">DONAR</a>
+                    <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">TESTIMONIO</a>
+                    <a href="#" class="block text-gray-700 hover:text-blue-600 font-medium dark:text-gray-300 dark:hover:text-blue-400">CONTACTO</a>
                 </nav>
                 
-                <!-- Botones de acción (Iniciar sesión, Registrarse) -->
+                <!-- Boton de acción (Iniciar Sesion)-->
                 <div class="flex items-center space-x-4">
-                    <a href="../Adoptafacil-main/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">Iniciar sesión</a>
-                    <a href="../Registro/index.html" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition dark:bg-green-700 dark:hover:bg-green-800">Registrarse</a>
+                    <a href="/Ingreso/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">Iniciar sesión</a>
                 </div>
             </div>
         </header>
         
         <!-- PORTADA PRINCIPAL -->
-        <section class="relative bg-gradient-to-r from-blue-500 to-green-400 text-white py-20 dark:from-blue-700 dark:to-green-600">
+        <section class="relative bg-gradient-to-r from-green-400 to-blue-500 text-white py-20 dark:from-green-600 dark:to-blue-700">
             <div id="particles-js" class="fixed inset-0 z-0"></div>
             <div class="container mx-auto text-center relative px-4">
-                <!-- Título principal -->
                 <h2 class="text-4xl font-bold mb-6">Encuentra a tu nuevo mejor amigo</h2>
-                <!-- Subtítulo -->
                 <p class="text-xl mb-8 mx-auto max-w-2xl">Conectamos a mascotas necesitadas con hogares amorosos desde 2025</p>
-    
+                
                 <!-- Barra de búsqueda -->
-                <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-xl p-2 flex dark:bg-gray-800">
+                <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-xl p-2 flex flex-col sm:flex-row space-y-2 sm:space-y-0 dark:bg-gray-800">
                     <!-- Campo de búsqueda por raza -->
                     <input type="text" placeholder="Buscar por raza (Ej: Perro, Gato)"
-                        class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400">
+                        class="w-full sm:flex-1 px-4 py-3 rounded-lg sm:rounded-l-lg sm:rounded-r-none focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400">
     
                     <!-- Campo de búsqueda por ubicación -->
                     <input type="text" placeholder="Ciudad"
-                        class="flex-grow px-4 py-3 border-l border-gray-200 focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:placeholder-gray-400">
+                        class="w-full sm:flex-1 px-4 py-3 rounded-lg sm:rounded-none border-t sm:border-t-0 sm:border-l border-gray-200 focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:placeholder-gray-400">
     
                     <!-- Botón de búsqueda -->
-                    <button class="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">
+                    <button class="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg sm:rounded-l-none sm:rounded-r-lg hover:bg-blue-700 transition dark:bg-blue-700 dark:hover:bg-blue-800">
                         Buscar
                     </button>
                 </div>
@@ -98,18 +100,17 @@
         
         <!-- CONTENIDO PRINCIPAL -->
         <main class="container mx-auto px-4 py-12 z-10 relative">
-            <!-- SECCIÓN: MASCOTAS DESTACADAS -->
+            <!-- SECCIÓN: MASCOTAS DISPONIBLES -->
             <section class="mb-16 fade-in">
                 <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Mascotas disponibles</h2>
-    
                 <!-- Grid de tarjetas de mascotas -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Tarjeta de mascota 1 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-0">
+                    <!-- Tarjeta de mascota -->
                     <div class="pet-card bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl dark:bg-gray-800 dark:shadow-dark">
-                        <!-- Imagen de la mascota con lazy loading -->
+                        <!-- Imagen -->
                         <img src="https://images.unsplash.com/photo-1583511655826-05700d52f4d9" alt="Perro Labrador Mix llamado Max" 
                              class="w-full h-48 object-cover" loading="lazy" width="400" height="192">
-                        <!-- Contenido de la tarjeta -->
+                        <!-- Contenido -->
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Max</h3>
                             <p class="text-gray-600 mb-2 dark:text-gray-300">Labrador Mix • 2 años</p>
@@ -136,7 +137,7 @@
     
                     <!-- Tarjeta de mascota 3 -->
                     <div class="pet-card bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl dark:bg-gray-800 dark:shadow-dark">
-                        <img src="https://images.unsplash.com/photo-1553284965-e2815db2e5a0" alt="Conejo Enano llamado Bugs" 
+                        <img src="https://images.ecestaticos.com/PZQajd6jDBfqpwv4RpnsydqY4oQ=/0x0:640x361/1440x810/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fb85%2F2e1%2F615%2Fb852e1615cd11fd2c7739c7942383c13.jpg" alt="Conejo Enano llamado Bugs" 
                              class="w-full h-48 object-cover" loading="lazy" width="400" height="192">
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Bugs</h3>
@@ -155,9 +156,9 @@
                 <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">Explora por categoría</h2>
     
                 <!-- Grid de categorías -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-0">
                     <!-- Categoría 1 - Perros -->
-                    <a href="#" class="category-card bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 dark:bg-gray-800 dark:shadow-dark">
+                    <a href="/Perros/Perros.html" class="category-card bg-white p-6 rounded-lg shadow-md text-center transition transform hover:scale-105 dark:bg-gray-800 dark:shadow-dark">
                         <div class="bg-blue-100 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 dark:bg-blue-900">
                             <span class="text-3xl">🐶</span>
                         </div>
@@ -195,10 +196,10 @@
             </section>
         </main>
     
-        <!-- FOOTER (PIE DE PÁGINA) -->
+        <!-- FOOTER -->
         <footer class="bg-gray-800 text-white py-12 z-10 relative dark:bg-gray-900">
             <div class="container mx-auto px-4">
-                <!-- Grid de columnas del footer -->
+                <!-- Grid de columnas -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <!-- Columna 1 - Información -->
                     <div>
@@ -242,7 +243,7 @@
                 </div>
             </div>
         </footer>
-            <!-- Scripts agregados -->
+        // Scripts agregados
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
         <script src="assets/js/dark-mode.js"></script>
         <script src="assets/js/particles-config.js"></script>

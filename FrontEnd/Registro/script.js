@@ -4,16 +4,11 @@ particlesJS.load('particles-js', 'particles.json', function() {
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault();
     const button = document.querySelector('button[type="submit"]');
-    const loader = document.createElement('div');
-    loader.className = 'loader';
-    button.innerHTML = ''; // Limpia texto del botón
-    button.appendChild(loader); // Agrega el spinner
-    button.disabled = true; // Desactiva el botón
     // Envío de formulario
     setTimeout(() => {
         alert('Registro exitoso');
-        button.innerHTML = 'Enviar formulario';
-        button.disabled = true;
+        button.innerHTML = 'Completar registro';
+        button.disabled = false; // Habilita el botón después del envío
     }, 2000); // Retraso de 2 segundos
 });
 

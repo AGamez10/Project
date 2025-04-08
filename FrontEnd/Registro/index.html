@@ -14,21 +14,18 @@
         <img src="Logo.png" alt="Logo de Adoptafácil" width="220" height="140">
         <h1>Registro de usuario</h2>
         <form action="submit" method="post">
-            <!--nombre visitante-->
+            <!--nombre completo-->
             <br><label for="nombre"></label>
-            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" required>
 
-            <!--apellido del visitante-->
-            <label for="apellido"></label>
-            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
-
-            <!--edad del visitante-->
+            <!--edad -->
             <label for="edad"></label>
             <input type="number" id="edad" name="edad" placeholder="Edad" min="18" max="100" required>
 
-            <!--fecha nacimiento del visitante-->
+            <!--fecha nacimiento-->
             <label for="fecha"></label>
-            <input type="date" id="fecha" name="Fecha de nacimiento">
+            <input type="text" id="fecha" name="Fecha de nacimiento" placeholder="Fecha de nacimiento" 
+            onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'">
 
             <!--ciudad de residencia-->
             <label for="ciudad"></label>
@@ -38,20 +35,24 @@
                 <option value="ca">Cali</option>
             </select>
 
-            <!--correo electrónico-->
+            <!--direccion-->
+            <label for="direccion"></label>
+            <input type="text" id="direccion" name="direccion" placeholder="Dirección" required>
+
+            <!--email-->
             <label for="correo"></label>
-            <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+            <input type="email" id="correo" name="correo" placeholder="Email" required>
 
             <!--password-->
             <label for="clave"></label>
             <input type="password" id="clave" name="clave" placeholder="Contraseña" required>
 
-            <!--Terminos y condiciones-->
+            <!--terminos y condiciones-->
             <label>
-                <input type="checkbox" name="aceptar" required><a href="https://beto18v.github.io/TYC/">Acepto términos y condiciones</a>
+                <input type="checkbox" name="aceptar" required><a href="/TYC/index.html">Acepto términos y condiciones</a>
             </label>
 
-            <!--Completar-->
+            <!--completar-->
             <br><button type="submit" name="enviar">Completar registro</button>
         </form>
     </div>
