@@ -4,6 +4,7 @@ import { Chart } from './Chart'
 import { RecentTable } from './RecentTable'
 
 export default function Dash() {
+  
   return (
     <main className="flex-1 overflow-y-auto p-6 bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-600 dark:to-blue-700">
       <div className="container mx-auto">

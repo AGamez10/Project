@@ -15,7 +15,7 @@ export default function ParticlesBackground() {
         particles: {
           number: {
             value: 80,
-            density: {
+            density: { 
               enable: true,
               value_area: 800
             }
@@ -62,7 +62,7 @@ export default function ParticlesBackground() {
           },
           move: {
             enable: true,
-            speed: 2,
+            speed: 4,
             direction: "none",
             random: false,
             straight: false,
@@ -83,7 +83,7 @@ export default function ParticlesBackground() {
               mode: "grab"
             },
             onclick: {
-              enable: true,
+              enable: false,
               mode: "push"
             },
             resize: true
