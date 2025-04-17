@@ -60,7 +60,7 @@ const Login = () => {
 
           {/* Olvidé mi contraseña */}
           <p className="mt-4">
-            <Link to="/recuperar-contrasena" className="text-blue-500 hover:underline">
+            <Link to="#" className="text-blue-500 hover:underline">
               ¿Olvidaste tu contraseña?
             </Link>
           </p>

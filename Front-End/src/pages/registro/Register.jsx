@@ -155,7 +155,7 @@ const RegisterPage = () => {
               className="mr-2 h-5 w-5 rounded border-gray-300 focus:ring-blue-500"
             />
             <label htmlFor="aceptar" className="text-sm">
-              Acepto los <Link to="/terminos-y-condiciones" className="text-blue-600 hover:underline">términos y condiciones</Link>
+              Acepto los <Link to="/tyc" className="text-blue-600 hover:underline">términos y condiciones</Link>
             </label>
           </div>
           
