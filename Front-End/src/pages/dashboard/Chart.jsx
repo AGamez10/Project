@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 
 // Registro de componentes necesarios de Chart.js
-// Esto es REQUERIDO para que funcione el gráfico
+// Esto es requerido para que funcione el gráfico
 ChartJS.register(
   CategoryScale,
   LinearScale,

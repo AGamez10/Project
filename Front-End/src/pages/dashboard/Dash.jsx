@@ -9,7 +9,7 @@ export default function Dash() {
     <main className="flex-1 overflow-y-auto p-6 bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-600 dark:to-blue-700">
       <div className="container mx-auto">
         {/* Título de la página */}
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Panel de Control</h1>
+        <h1 className="text-2xl font-bold text-white dark:text-gray-200 mb-6">Panel de Control</h1>
         
         {/* Tarjetas de estadísticas */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">

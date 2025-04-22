@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../public/Logo.png';
 import ParticlesBackground from '../../components/ParticlesBackground';
+import DarkModeToggle from '../../components/DarkModeToggle';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -40,16 +41,16 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center relative overflow-y-auto bg-gradient-to-br from-[#80ff84] to-[#5190fc]">
+    <div className="min-h-screen flex justify-center items-center relative overflow-y-auto bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-600 dark:to-blue-700">
       <ParticlesBackground />
+      <DarkModeToggle />
       <div className="container text-center max-w-md w-full p-5 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 shadow-lg z-10 animate-fade-in hover:shadow-xl hover:scale-[1.005] transition-all duration-300">
         <img 
           src={Logo} 
-          alt="Logo de Adoptafácil" 
+          alt="Logo" 
           className="w-56 h-36 mx-auto mb-6"
         />
-        
-        <h1 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-700 to-blue-800 bg-clip-text text-transparent">
+        <h1 className="text-2xl font-bold mb-6 bg-gradient-to-r from-green-700 to-blue-800 dark:from-green-300 dark:to-blue-300 bg-clip-text text-transparent">
           Registro de usuario
         </h1>
         
@@ -152,10 +153,10 @@ const RegisterPage = () => {
               checked={formData.aceptar}
               onChange={handleChange}
               required
-              className="mr-2 h-5 w-5 rounded border-gray-300 focus:ring-blue-500"
+              className="mr-2 h-5 w-5 rounded border-gray-300 focus:ring"
             />
             <label htmlFor="aceptar" className="text-sm">
-              Acepto los <Link to="/tyc" className="text-blue-600 hover:underline">términos y condiciones</Link>
+              Acepto los <Link to="/tyc" className="text-blue-600 dark:text-gray-100 hover:underline">términos y condiciones</Link>
             </label>
           </div>
           

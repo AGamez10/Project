@@ -2,17 +2,25 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground';
 
+// Componente auxiliar para secciones
+const Section = ({ title, content }) => (
+  <div className="mb-6">
+    <h4 className="text-xl font-semibold mb-2 text-green-800">{title}</h4>
+    <p className="text-gray-700 leading-relaxed">{content}</p>
+  </div>
+);
+
 const TermsAndConditions = () => {
     useEffect(() => {
         document.title = "Terminos y condiciones | AdoptaFácil";
       }, []);
       
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative p-5 bg-gradient-to-br from-[#80ff84] to-[#5190fc] text-gray-800 overflow-auto">
+    <div className="min-h-screen flex flex-col items-center justify-center relative p-5 bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-600 dark:to-blue-700 overflow-auto">
       <ParticlesBackground />
       
       <div className="max-w-4xl w-full z-10">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-green-700 to-blue-800 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-green-700 to-blue-800 dark:from-green-300 dark:to-blue-300 bg-clip-text text-transparent">
           Términos y Condiciones de Uso
         </h1>
         
@@ -113,13 +121,5 @@ const TermsAndConditions = () => {
     </div>
   );
 };
-
-// Componente auxiliar para secciones
-const Section = ({ title, content }) => (
-  <div className="mb-6">
-    <h4 className="text-xl font-semibold mb-2 text-green-800">{title}</h4>
-    <p className="text-gray-700 leading-relaxed">{content}</p>
-  </div>
-);
 
 export default TermsAndConditions;

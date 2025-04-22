@@ -10,6 +10,7 @@ export default function ParticlesBackground() {
   return (
     <Particles
       id="particles-js"
+      className="w-full h-full"
       init={particlesInit}
       options={{
         particles: {
