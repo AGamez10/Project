@@ -24,12 +24,6 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Datos del formulario:', formData);
-    // Aquí iría la lógica para enviar los datos al backend
-  };
-
   const handleDateFocus = (e) => {
     e.target.type = 'date';
   };
@@ -54,7 +48,7 @@ const RegisterPage = () => {
           Registro de usuario
         </h1>
         
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+        <form className="flex flex-col space-y-4">
           {/* Nombre completo */}
           <input
             type="text"

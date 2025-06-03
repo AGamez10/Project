@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ParticlesBackground from '../../components/ParticlesBackground';
 import DarkModeToggle from '../../components/DarkModeToggle';
 
 const Contacto = () => {
@@ -23,7 +22,7 @@ const Contacto = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulación de envío exitoso
+    // Simulación envío exitoso
     setEnviado(true);
     setFormData({
       nombre: '',
@@ -31,12 +30,10 @@ const Contacto = () => {
       asunto: '',
       mensaje: ''
     });
-    // En un caso real, aquí iría la lógica para enviar el formulario a un backend
   };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
-      <ParticlesBackground />
       <DarkModeToggle />
       
       <div className="container mx-auto px-4 py-12">

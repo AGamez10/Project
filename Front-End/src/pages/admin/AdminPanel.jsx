@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ParticlesBackground from '../../components/ParticlesBackground';
 import DarkModeToggle from '../../components/DarkModeToggle';
 
 const AdminPanel = () => {
@@ -45,7 +44,6 @@ const AdminPanel = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
-      <ParticlesBackground />
       <DarkModeToggle />
       
       <div className="container mx-auto px-4 py-8">

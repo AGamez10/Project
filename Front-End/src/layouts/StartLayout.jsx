@@ -1,15 +1,18 @@
-import DarkModeToggle from '../components/DarkModeToggle';
-import Footer from 'd:/Documentos/Sena/react-adoptafacil/Front-End/src/pages/inicio/Footer.jsx';
-import { Outlet } from 'react-router-dom';
+import DarkModeToggle from "../components/DarkModeToggle";
+import Footer from "../pages/inicio/Footer";
+import Header from "../pages/inicio/Header";
+import ParticlesBackground from "../components/ParticlesBackground";
+import { Outlet } from "react-router-dom";
 
 const StartLayout = () => {
-  
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-800 transition-colors duration-200">
-        <DarkModeToggle />
-        <Outlet />
-        <Footer />
-      </div>
+  return (
+    <div className="relative flex flex-col min-h-screen bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-600 dark:to-blue-700 transition-colors duration-200">
+      <ParticlesBackground />
+      <DarkModeToggle />
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
   );
 };
 

@@ -28,7 +28,7 @@ const Error404 = () => {
         </Link>
       </div>
 
-      <div className="fixed bottom-5 left-5 opacity-80 z-0">
+      <div className="fixed top-5 left-5 opacity-80 z-0">
         <img src={Logo} alt="Logo" className="w-24 h-16" />
       </div>
       <div className="fixed opacity-80 z-0">

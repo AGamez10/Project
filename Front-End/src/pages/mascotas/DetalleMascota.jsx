@@ -4,7 +4,6 @@ import DarkModeToggle from '../../components/DarkModeToggle';
 
 const DetalleMascota = () => {
   const { id } = useParams();
-  // En un caso real, esta información vendría de una API
   const [mascota, setMascota] = useState({
     id: id || '1',
     nombre: 'Max',
@@ -57,7 +56,7 @@ const DetalleMascota = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar la solicitud de adopción
+    // lógica para enviar la solicitud de adopción
     alert('Solicitud enviada con éxito. Nos pondremos en contacto contigo pronto.');
     setMostrarFormulario(false);
   };
@@ -67,7 +66,7 @@ const DetalleMascota = () => {
       <DarkModeToggle />
       
       <div className="container mx-auto px-4 py-8">
-        {/* Navegación de migas de pan */}
+        {/* Navegación */}
         <div className="text-sm breadcrumbs mb-4">
           <ul className="flex space-x-2 text-gray-600 dark:text-gray-400">
             <li><Link to="/start" className="hover:text-blue-600 dark:hover:text-blue-400">Inicio</Link> /</li>
@@ -87,7 +86,7 @@ const DetalleMascota = () => {
                   className="w-full h-full object-cover"
                 />
                 
-                {/* Controles de la galería */}
+                {/* Control galería */}
                 <div className="absolute inset-0 flex items-center justify-between px-4">
                   <button 
                     onClick={() => setImagenActiva((prev) => (prev === 0 ? mascota.imagenes.length - 1 : prev - 1))}
