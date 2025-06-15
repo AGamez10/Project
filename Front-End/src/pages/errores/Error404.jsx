@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../../public/Logo.png';
-import Dog from '../../../public/dog.png';
 import ParticlesBackground from '../../components/ParticlesBackground';
 
 const Error404 = () => {
@@ -29,10 +27,12 @@ const Error404 = () => {
       </div>
 
       <div className="fixed top-5 left-5 opacity-80 z-0">
-        <img src={Logo} alt="Logo" className="w-24 h-16" />
+        <img src="/Logo.png" alt="Logo" className="w-24 h-16" />
       </div>
       <div className="fixed opacity-80 z-0">
-        <img src={Dog} alt="Perro" className="w-[300px] h-[300px]" />
+        <div className="w-[300px] h-[300px] flex items-center justify-center text-white/30 text-8xl">
+          🐕
+        </div>
       </div>
     </div>
   );

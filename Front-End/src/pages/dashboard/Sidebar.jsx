@@ -1,11 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../../../public/Logo.png";
-import LogoWhite from "../../../public/LogoWhite.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(true);
   const [activeItem, setActiveItem] = useState("Dashboard");
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Incluso si hay error, redirigir al inicio
+      navigate('/', { replace: true });
+    }
+  };
 
   return (
     <aside
@@ -40,13 +52,13 @@ export default function Sidebar() {
         <div className="flex items-center justify-center py-5 border-b border-gray-200 dark:border-gray-700">
           {/* Logo para modo claro - visible solo en light */}
           <img
-            src={Logo}
+            src="/Logo.png"
             alt="LogoLight"
             className="h-12 w-auto block dark:hidden"
           />
           {/* Logo para modo oscuro - visible solo en dark */}
           <img
-            src={LogoWhite}
+            src="/LogoWhite.png"
             alt="LogoDark"
             className="h-12 w-auto hidden dark:block"
           />
@@ -92,6 +104,11 @@ export default function Sidebar() {
                 link: "/dashboard/donaciones",
               },
               {
+                name: "Agente IA",
+                icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+                link: "/dashboard/ai-agent",
+              },
+              {
                 name: "Configuración",
                 icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z",
                 link: "/dashboard/perfil",
@@ -122,6 +139,24 @@ export default function Sidebar() {
                 </Link>
               </li>
             ))}
+            
+            {/* Botón de logout */}
+            <li className={collapsed ? "flex justify-center" : ""}>
+              <button
+                onClick={handleLogout}
+                className="flex items-center p-2 rounded-lg text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-red-900 w-full"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
+                </svg>
+                {!collapsed && <span className="ml-3">Cerrar Sesión</span>}
+              </button>
+            </li>
           </ul>
         </nav>
 
@@ -138,10 +173,10 @@ export default function Sidebar() {
             {!collapsed && (
               <div className="ml-3">
                 <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Admin
+                  {user?.name || 'Usuario'}
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  admin@adoptafacil.com
+                  {user?.email || 'usuario@adoptafacil.com'}
                 </p>
               </div>
             )}

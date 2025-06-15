@@ -1,16 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import PetCard from "./PetCard";
+import apiService from "../../services/api";
 
 const Perros = () => {
-  useEffect(() => {
-    document.title = "Perros en Adopción | AdoptaFácil";
-  }, []);
-
   const [filtro, setFiltro] = useState("todos");
   const [busqueda, setBusqueda] = useState("");
+  const [perros, setPerros] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // Datos de ejemplo de perros disponibles para adopción
-  const perros = [
+  const fetchPerros = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError('');
+      const response = await apiService.getPets({ species: 'perro' });
+      setPerros(response.data || []);
+    } catch (err) {
+      setError('Error al cargar las mascotas');
+      console.error('Error fetching pets:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.title = "Perros en Adopción | AdoptaFácil";
+    fetchPerros();
+  }, [fetchPerros]);
+
+  // Datos de ejemplo como fallback
+  const perrosEjemplo = [
     {
       name: "Max",
       breed: "Labrador Retriever",
@@ -61,24 +80,35 @@ const Perros = () => {
     },
   ];
 
-  // Filtrar perros según la búsqueda y el filtro seleccionado
-  const perrosFiltrados = perros.filter((perro) => {
-    const coincideBusqueda =
-      perro.name.toLowerCase().includes(busqueda.toLowerCase()) ||
-      perro.breed.toLowerCase().includes(busqueda.toLowerCase());
+  // Usar datos de la API o datos de ejemplo como fallback
+  const datosPerros = useMemo(() => 
+    perros.length > 0 ? perros : perrosEjemplo, 
+    [perros]
+  );
 
-    if (filtro === "todos") return coincideBusqueda;
-    if (filtro === "jovenes")
-      return coincideBusqueda && perro.age.includes("1");
-    if (filtro === "adultos")
-      return (
-        coincideBusqueda && (perro.age.includes("2") || perro.age.includes("3"))
-      );
-    if (filtro === "mayores")
-      return coincideBusqueda && parseInt(perro.age) >= 4;
+  // Filtrar perros según la búsqueda y el filtro seleccionado (memoizado)
+  const perrosFiltrados = useMemo(() => {
+    return datosPerros.filter((perro) => {
+      const coincideBusqueda =
+        perro.name.toLowerCase().includes(busqueda.toLowerCase()) ||
+        (perro.breed && perro.breed.toLowerCase().includes(busqueda.toLowerCase()));
 
-    return coincideBusqueda;
-  });
+      if (filtro === "todos") return coincideBusqueda;
+      if (filtro === "jovenes")
+        return coincideBusqueda && perro.age <= 1;
+      if (filtro === "adultos")
+        return coincideBusqueda && (perro.age >= 2 && perro.age <= 3);
+      if (filtro === "mayores")
+        return coincideBusqueda && perro.age >= 4;
+
+      return coincideBusqueda;
+    });
+  }, [datosPerros, busqueda, filtro]);
+
+  // Debounce para la búsqueda
+  const handleBusquedaChange = useCallback((e) => {
+    setBusqueda(e.target.value);
+  }, []);
 
   return (
     <div className="min-h-screen transition-colors duration-200">
@@ -97,7 +127,7 @@ const Perros = () => {
               type="text"
               placeholder="Buscar por nombre o raza..."
               value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
+              onChange={handleBusquedaChange}
               className="w-full px-4 py-3 rounded-lg focus:outline-none text-gray-700 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
             />
           </div>
@@ -151,27 +181,50 @@ const Perros = () => {
             </button>
           </div>
 
+          {/* Indicador de carga */}
+          {loading && (
+            <div className="text-center py-10">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">Cargando mascotas...</p>
+            </div>
+          )}
+
+          {/* Mensaje de error */}
+          {error && (
+            <div className="text-center py-10">
+              <p className="text-red-600 dark:text-red-400">{error}</p>
+              <button 
+                onClick={fetchPerros}
+                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                Reintentar
+              </button>
+            </div>
+          )}
+
           {/* Grid de tarjetas de perros */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
-            {perrosFiltrados.length > 0 ? (
-              perrosFiltrados.map((perro, index) => (
-                <PetCard
-                  key={index}
-                  name={perro.name}
-                  breed={perro.breed}
-                  age={perro.age}
-                  description={perro.description}
-                  imageUrl={perro.imageUrl}
-                />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-10">
-                <h3 className="text-xl text-gray-600 dark:text-gray-400">
-                  No se encontraron perros con los criterios seleccionados
-                </h3>
-              </div>
-            )}
-          </div>
+          {!loading && !error && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+              {perrosFiltrados.length > 0 ? (
+                perrosFiltrados.map((perro, index) => (
+                  <PetCard
+                    key={perro.id || index}
+                    name={perro.name}
+                    breed={perro.breed}
+                    age={typeof perro.age === 'number' ? `${perro.age} años` : perro.age}
+                    description={perro.description}
+                    imageUrl={perro.image_url || perro.imageUrl}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-10">
+                  <h3 className="text-xl text-gray-600 dark:text-gray-400">
+                    No se encontraron perros con los criterios seleccionados
+                  </h3>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Sección de información sobre adopción */}
           <section className="mt-16 bg-white p-8 rounded-xl shadow-md dark:bg-gray-700 fade-in">

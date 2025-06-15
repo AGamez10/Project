@@ -1,36 +1,51 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
-import DashboardLayout from "./layouts/DashboardLayout";
-import Dash from "./pages/dashboard/Dash";
-import Error404 from "./pages/errores/Error404";
-import Error500 from "./pages/errores/Error500";
-import Login from "./pages/ingreso/Login";
-import RegisterPage from "./pages/registro/Register";
-import TermsAndConditions from "./pages/tyc/tyc";
-import StartLayout from "./layouts/StartLayout";
-import Main from "./pages/inicio/Main.jsx";
-import Perros from "./pages/inicio/Perros.jsx";
-import RegistroOpciones from "./pages/registro/RegistroOpciones";
-import ConocerMas from "./pages/conocer-mas/ConocerMas.jsx";
-import PerfilUsuario from "./pages/perfil/PerfilUsuario";
-import DetalleMascota from "./pages/mascotas/DetalleMascota";
-import AdminPanel from "./pages/admin/AdminPanel";
-import Contacto from "./pages/contacto/Contacto";
-import FavoritePets from "./pages/dashboard/FavoritePets";
-import Donaciones from "./pages/donaciones/Donaciones";
-import PendingRequests from "./pages/dashboard/PendingRequests";
-import NotificationsPanel from "./pages/dashboard/NotificationsPanel";
-import AdoptionStats from "./pages/dashboard/AdoptionStats";
-import AdoptionMap from "./pages/dashboard/AdoptionMap";
-import DonationsSummary from "./pages/dashboard/DonationsSummary";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import LoadingSpinner from "./components/LoadingSpinner";
+import ErrorBoundary from "./components/ErrorBoundary";
+
+// Lazy loading de componentes
+const DashboardLayout = lazy(() => import("./layouts/DashboardLayout"));
+const Dash = lazy(() => import("./pages/dashboard/Dash"));
+const Error404 = lazy(() => import("./pages/errores/Error404"));
+const Error500 = lazy(() => import("./pages/errores/Error500"));
+const Login = lazy(() => import("./pages/ingreso/Login"));
+const RegisterPage = lazy(() => import("./pages/registro/Register"));
+const TermsAndConditions = lazy(() => import("./pages/tyc/tyc"));
+const StartLayout = lazy(() => import("./layouts/StartLayout"));
+const Main = lazy(() => import("./pages/inicio/Main.jsx"));
+const Perros = lazy(() => import("./pages/inicio/Perros.jsx"));
+const RegistroOpciones = lazy(() => import("./pages/registro/RegistroOpciones"));
+const ConocerMas = lazy(() => import("./pages/conocer-mas/ConocerMas.jsx"));
+const PerfilUsuario = lazy(() => import("./pages/perfil/PerfilUsuario"));
+const DetalleMascota = lazy(() => import("./pages/mascotas/DetalleMascota"));
+const AdminPanel = lazy(() => import("./pages/admin/AdminPanel"));
+const Contacto = lazy(() => import("./pages/contacto/Contacto"));
+const FavoritePets = lazy(() => import("./pages/dashboard/FavoritePets"));
+const Donaciones = lazy(() => import("./pages/donaciones/Donaciones"));
+const PendingRequests = lazy(() => import("./pages/dashboard/PendingRequests"));
+const NotificationsPanel = lazy(() => import("./pages/dashboard/NotificationsPanel"));
+const AdoptionStats = lazy(() => import("./pages/dashboard/AdoptionStats"));
+const AdoptionMap = lazy(() => import("./pages/dashboard/AdoptionMap"));
+const DonationsSummary = lazy(() => import("./pages/dashboard/DonationsSummary"));
+const AIAgent = lazy(() => import("./components/AIAgent"));
 
 function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
           {/* Ruta que usa el layout */}
-          <Route path="dashboard" element={<DashboardLayout />}>
+          <Route path="dashboard" element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={<Dash />} />
             <Route path="favoritos" element={<FavoritePets />} />
             <Route path="solicitudes" element={<PendingRequests />} />
@@ -38,6 +53,7 @@ function App() {
             <Route path="estadisticas" element={<AdoptionStats />} />
             <Route path="mapa" element={<AdoptionMap />} />
             <Route path="donaciones" element={<DonationsSummary />} />
+            <Route path="ai-agent" element={<AIAgent />} />
           </Route>
           {/* Ruta que usa el Inicio */}
           <Route path="/" element={<StartLayout />}>
@@ -56,9 +72,12 @@ function App() {
           <Route path="contacto" element={<Contacto />} />
           <Route path="donaciones" element={<Donaciones />} />
           <Route path="perfil" element={<PerfilUsuario />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </AuthProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../../public/Logo.png";
-import LogoWhite from "../../../public/LogoWhite.png";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +10,7 @@ const Header = () => {
         {/* Logo y nombre */}
         <div className="flex items-center space-x-2">
           <img
-            src={Logo}
+            src="/Logo.png"
             alt="Logo Adoptafácil"
             className="h-12 w-full block dark:hidden"
             width="48"
@@ -20,7 +18,7 @@ const Header = () => {
             loading="lazy"
           />
           <img
-            src={LogoWhite}
+            src="/LogoWhite.png"
             alt="Logo Adoptafácil"
             className="h-12 w-full hidden dark:block"
             width="48"

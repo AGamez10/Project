@@ -1,20 +1,21 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Logo from '../../../public/Logo.png';
+import { Link, useNavigate } from 'react-router-dom';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import DarkModeToggle from '../../components/DarkModeToggle';
+import { useAuth } from '../../context/AuthContext';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    nombre: '',
-    edad: '',
-    fecha: '',
-    ciudad: 'bo',
-    direccion: '',
-    correo: '',
-    clave: '',
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
     aceptar: false
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -24,13 +25,24 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleDateFocus = (e) => {
-    e.target.type = 'date';
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-  const handleDateBlur = (e) => {
-    if (!e.target.value) {
-      e.target.type = 'text';
+    if (formData.password !== formData.password_confirmation) {
+      setError('Las contraseñas no coinciden');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await register(formData);
+      navigate('/dashboard');
+    } catch (err) {
+      setError('Error al registrar usuario. Por favor, intenta de nuevo.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,7 +52,7 @@ const RegisterPage = () => {
       <DarkModeToggle />
       <div className="container text-center max-w-md w-full p-5 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 shadow-lg z-10 animate-fade-in hover:shadow-xl hover:scale-[1.005] transition-all duration-300">
         <img 
-          src={Logo} 
+          src="/Logo.png" 
           alt="Logo" 
           className="w-56 h-36 mx-auto mb-6"
         />
@@ -48,68 +60,21 @@ const RegisterPage = () => {
           Registro de usuario
         </h1>
         
-        <form className="flex flex-col space-y-4">
+        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+
           {/* Nombre completo */}
           <input
             type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             placeholder="Nombre Completo"
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          
-          {/* Edad */}
-          <input
-            type="number"
-            id="edad"
-            name="edad"
-            value={formData.edad}
-            onChange={handleChange}
-            placeholder="Edad"
-            min="18"
-            max="100"
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          
-          {/* Fecha de nacimiento */}
-          <input
-            type="text"
-            id="fecha"
-            name="fecha"
-            value={formData.fecha}
-            onChange={handleChange}
-            onFocus={handleDateFocus}
-            onBlur={handleDateBlur}
-            placeholder="Fecha de nacimiento"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-          
-          {/* Ciudad de residencia */}
-          <select
-            id="ciudad"
-            name="ciudad"
-            value={formData.ciudad}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="bo">Bogotá</option>
-            <option value="me">Medellín</option>
-            <option value="ca">Cali</option>
-          </select>
-          
-          {/* Dirección */}
-          <input
-            type="text"
-            id="direccion"
-            name="direccion"
-            value={formData.direccion}
-            onChange={handleChange}
-            placeholder="Dirección"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
@@ -117,9 +82,9 @@ const RegisterPage = () => {
           {/* Email */}
           <input
             type="email"
-            id="correo"
-            name="correo"
-            value={formData.correo}
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             placeholder="Email"
             required
@@ -129,11 +94,23 @@ const RegisterPage = () => {
           {/* Contraseña */}
           <input
             type="password"
-            id="clave"
-            name="clave"
-            value={formData.clave}
+            id="password"
+            name="password"
+            value={formData.password}
             onChange={handleChange}
             placeholder="Contraseña"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+
+          {/* Confirmar Contraseña */}
+          <input
+            type="password"
+            id="password_confirmation"
+            name="password_confirmation"
+            value={formData.password_confirmation}
+            onChange={handleChange}
+            placeholder="Confirmar Contraseña"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
@@ -157,9 +134,10 @@ const RegisterPage = () => {
           {/* Botón de envío */}
           <button
             type="submit"
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 hover:scale-[1.02] transform"
+            disabled={loading}
+            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 hover:scale-[1.02] transform disabled:opacity-50"
           >
-            Completar registro
+            {loading ? 'Registrando...' : 'Completar registro'}
           </button>
         </form>
       </div>
